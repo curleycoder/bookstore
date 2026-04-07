@@ -22,12 +22,14 @@
 .page {
     display: flex;
     flex-direction: column;
-    width: 80%;
-    margin: 0 auto;
     min-height: 100vh;
 }
 
 main {
     flex: 1;
     padding: 1rem;
+}
+
+footer {
+    margin-top: auto;
 }

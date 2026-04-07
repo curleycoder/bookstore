@@ -8,10 +8,13 @@
 
 <div class="row mt-5 mx-auto">
     <div class="col-sm-2 border pt-3 me-3 mb-3">
-        <a href="/books/create" class="btn btn-primary">New Book</a>
+        <a href="/books/create" class="btn btn-primary">Create New</a>
+        <div class="mt-3">
+            <input class="form-control" placeholder="search..." @bind="searchFilter" @bind:event="oninput" @bind:after="ResetPage" />
+        </div>
         <div class="mt-3">
             <h6>Filter by:</h6>
-            <select class="form-control" @bind="genreFilter">
+            <select class="form-control" @bind="genreFilter" @bind:after="ResetPage">
                 <option value="">Genre</option>
                 @if (genres != null) {
                     @foreach(var genre in genres){
@@ -20,19 +23,45 @@
                 }
             </select>
         </div>
+        <div class="mt-3">
+            <h6>Sort by:</h6>
+            <select class="form-control" @bind="priceSort" @bind:after="ResetPage">
+                <option value="">Price</option>
+                <option value="asc">Low Price</option>
+                <option value="desc">High Price</option>
+            </select>
+        </div>
     </div>
 
     <div class="col">
         @if (books is null){
             <p>Loading...</p>
         }
-        else 
+        else
         {
             <div class="hstack flex-wrap gap-3">
-                @foreach(var book in filtered){
+                @foreach(var book in paged){
                     <BookCard Book="@book" />
                 }
             </div>
+
+            <nav class="mt-3">
+                <ul class="pagination">
+                    <li class="page-item @(currentPage == 1 ? "disabled" : "")">
+                        <a class="page-link" @onclick="() => GoToPage(currentPage - 1)">&laquo;</a>
+                    </li>
+                    @for (int i = 1; i <= totalPages; i++)
+                    {
+                        var p = i;
+                        <li class="page-item @(currentPage == p ? "active" : "")">
+                            <a class="page-link" @onclick="() => GoToPage(p)">@p</a>
+                        </li>
+                    }
+                    <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
+                        <a class="page-link" @onclick="() => GoToPage(currentPage + 1)">&raquo;</a>
+                    </li>
+                </ul>
+            </nav>
         }
     </div>
 </div>
@@ -44,9 +73,37 @@
     private IEnumerable<Book> books => context.Books.AsNoTracking();
 
     private string genreFilter = string.Empty;
+    private string priceSort = string.Empty;
+    private string searchFilter = string.Empty;
+    private int currentPage = 1;
+    private const int pageSize = 3;
 
-    private IEnumerable<Book> filtered => books
-        .Where(b => string.IsNullOrWhiteSpace(genreFilter) || b.Genre == genreFilter);
+    private IEnumerable<Book> filtered
+    {
+        get
+        {
+            var result = books
+                .Where(b => string.IsNullOrWhiteSpace(genreFilter) || b.Genre == genreFilter)
+                .Where(b => string.IsNullOrWhiteSpace(searchFilter) || b.Title.Contains(searchFilter));
+            return priceSort switch
+            {
+                "asc"  => result.OrderBy(b => b.Price),
+                "desc" => result.OrderByDescending(b => b.Price),
+                _      => result
+            };
+        }
+    }
+
+    private IEnumerable<Book> paged => filtered.Skip((currentPage - 1) * pageSize).Take(pageSize);
+    private int totalPages => Math.Max(1, (int)Math.Ceiling(filtered.Count() / (double)pageSize));
+
+    private void ResetPage() => currentPage = 1;
+
+    private void GoToPage(int page)
+    {
+        if (page >= 1 && page <= totalPages)
+            currentPage = page;
+    }
 
     private IEnumerable<string> genres => books.Select(b => b.Genre).Distinct();
 
