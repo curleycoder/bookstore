@@ -6,7 +6,7 @@ public class OrderState
 {
     public Order Order { get; set; } = new();
 
-    public event Action OnChange;
+    public event Action? OnChange;
 
     public OrderState()
     {

@@ -25,7 +25,7 @@
 }
 
 @code {
-    private BookstoreDb context { get; set; }
+    private BookstoreDb context { get; set; } = default!;
     private Order Order => OrderState.Order;
 
     protected override void OnInitialized()

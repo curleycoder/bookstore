@@ -1,5 +1,5 @@
-<div class="card overflow-hidden text-white" 
-    style="width: 14rem; height: 20rem;">
+<div class="card overflow-hidden text-white"
+    style="width: 18rem; height: 26rem;">
     <img src="@Book.CoverImageUrl" alt="@Book.Title" />
     <a href="/books/details?id=@Book.Id" class="stretched-link"></a>
     <div class="card-img-overlay d-flex flex-column p-0">
@@ -16,5 +16,5 @@
 </div>
 
 @code {
-    [Parameter] public Book Book { get; set; }
+    [Parameter] public Book Book { get; set; } = default!;
 }

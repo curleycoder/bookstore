@@ -44,7 +44,10 @@
                         <dd class="col-sm-8">@book.Price</dd>
                     </dl>
                     <div>
-                        <a href="@($"/books/edit?id={book.Id}")">Edit</a> |
+                        <AuthorizeView>
+                            <a href="@($"/books/edit?id={book.Id}")">Edit</a> |
+                            <a href="@($"/books/delete?id={book.Id}")">Delete</a> |
+                        </AuthorizeView>
                         <a href="@($"/")">Back to List</a>
                     </div>
 

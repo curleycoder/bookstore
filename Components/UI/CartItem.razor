@@ -23,7 +23,7 @@
 </div>
 
 @code {
-    [Parameter] public OrderItem item { get; set; }
+    [Parameter] public OrderItem item { get; set; } = default!;
     [Parameter] public EventCallback OnIncrement { get; set; }
     [Parameter] public EventCallback OnDecrement { get; set; }
     [Parameter] public EventCallback OnRemove { get; set; }

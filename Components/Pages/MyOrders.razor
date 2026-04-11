@@ -35,8 +35,8 @@ else
 }
 
 @code {
-    private BookstoreDb context { get; set; }
-    private List<Order> orders { get; set; }
+    private BookstoreDb context { get; set; } = default!;
+    private List<Order> orders { get; set; } = default!;
 
     protected override void OnInitialized()
     {

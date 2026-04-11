@@ -15,18 +15,18 @@ primary
 lastDtbSucceeded
 
 [properties]
-AssemblyName=bookstore
+AssemblyName=Bookstore
 CommandLineArgsForDesignTimeEvaluation=-langversion:14.0 -define:TRACE
 CompilerGeneratedFilesOutputPath=
 MaxSupportedLangVersion=14.0
 ProjectAssetsFile=<PATH>obj/project.assets.json
-RootNamespace=bookstore
+RootNamespace=Bookstore
 RunAnalyzers=
 RunAnalyzersDuringLiveAnalysis=
-SolutionPath=*Undefined*
+SolutionPath=<PATH>bookstore.sln
 TargetFrameworkIdentifier=.NETCoreApp
-TargetPath=<PATH>bin/Debug/net10.0/bookstore.dll
-TargetRefPath=<PATH>obj/Debug/net10.0/ref/bookstore.dll
+TargetPath=<PATH>bin/Debug/net10.0/Bookstore.dll
+TargetRefPath=<PATH>obj/Debug/net10.0/ref/Bookstore.dll
 TemporaryDependencyNodeTargetIdentifier=net10.0
 
 [commandLineArguments]
@@ -45,8 +45,8 @@ TemporaryDependencyNodeTargetIdentifier=net10.0
 /debug:portable
 /filealign:512
 /optimize-
-/out:obj/Debug/net10.0/bookstore.dll
-/refout:obj/Debug/net10.0/refint/bookstore.dll
+/out:obj/Debug/net10.0/Bookstore.dll
+/refout:obj/Debug/net10.0/refint/Bookstore.dll
 /target:exe
 /warnaserror-
 /utf8output
@@ -56,14 +56,21 @@ TemporaryDependencyNodeTargetIdentifier=net10.0
 /warnaserror+:NU1605,SYSLIB0011
 
 [sourceFiles]
+Components/Account/
+ IdentityComponentsEndpointRouteBuilderExtensions.cs
+ IdentityNoOpEmailSender.cs
+ IdentityRedirectManager.cs
+ IdentityRevalidatingAuthenticationStateProvider.cs
+ PasskeyInputModel.cs
+ PasskeyOperation.cs
 Data/
  BookstoreDb.cs
  SeedData.cs
 Migrations/
  20260326233226_InitialCreate.cs
  20260326233226_InitialCreate.Designer.cs
- 20260327000738_InitialCreate.cs
- 20260327000738_InitialCreate.Designer.cs
+ 20260411193457_CreateIdentityTables.cs
+ 20260411193457_CreateIdentityTables.Designer.cs
  BookstoreDbModelSnapshot.cs
 Models/
  Book.cs
@@ -71,8 +78,8 @@ Models/
  OrderItem.cs
 obj/Debug/net10.0/
  .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
- bookstore.AssemblyInfo.cs
- bookstore.GlobalUsings.g.cs
+ Bookstore.AssemblyInfo.cs
+ Bookstore.GlobalUsings.g.cs
  EmbeddedAttribute.cs
  ValidatableTypeAttribute.cs
 Program.cs
@@ -392,6 +399,10 @@ Services/OrderState.cs
  azure.core/1.47.1/lib/net8.0/Azure.Core.dll
  azure.identity/1.14.2/lib/net8.0/Azure.Identity.dll
  humanizer.core/2.14.1/lib/net6.0/Humanizer.dll
+ microsoft.aspnetcore.components.quickgrid.entityframeworkadapter/10.0.5/lib/net10.0/Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter.dll
+ microsoft.aspnetcore.components.quickgrid/10.0.5/lib/net10.0/Microsoft.AspNetCore.Components.QuickGrid.dll
+ microsoft.aspnetcore.diagnostics.entityframeworkcore/10.0.5/lib/net10.0/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
+ microsoft.aspnetcore.identity.entityframeworkcore/10.0.5/lib/net10.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
  microsoft.aspnetcore.razor.language/6.0.24/lib/netstandard2.0/Microsoft.AspNetCore.Razor.Language.dll
  microsoft.bcl.asyncinterfaces/8.0.0/lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll
  microsoft.bcl.cryptography/9.0.4/lib/net9.0/Microsoft.Bcl.Cryptography.dll
@@ -495,9 +506,52 @@ Services/OrderState.cs
 
 [analyzerConfigFiles]
 ../../../../../../../../usr/local/share/dotnet/sdk/10.0.101/Sdks/Microsoft.NET.Sdk/analyzers/build/config/analysislevel_10_default.globalconfig
-obj/Debug/net10.0/bookstore.GeneratedMSBuildEditorConfig.editorconfig
+obj/Debug/net10.0/Bookstore.GeneratedMSBuildEditorConfig.editorconfig
 
 [additionalFiles]
+Components/Account/Pages/
+ AccessDenied.razor
+ ConfirmEmail.razor
+ ConfirmEmailChange.razor
+ ExternalLogin.razor
+ ForgotPassword.razor
+ ForgotPasswordConfirmation.razor
+ InvalidPasswordReset.razor
+ InvalidUser.razor
+ Lockout.razor
+ Login.razor
+ LoginWith2fa.razor
+ LoginWithRecoveryCode.razor
+ Manage/
+  ChangePassword.razor
+  DeletePersonalData.razor
+  Disable2fa.razor
+  Email.razor
+  EnableAuthenticator.razor
+  ExternalLogins.razor
+  GenerateRecoveryCodes.razor
+  Index.razor
+  Passkeys.razor
+  PersonalData.razor
+  RenamePasskey.razor
+  ResetAuthenticator.razor
+  SetPassword.razor
+  TwoFactorAuthentication.razor
+  _Imports.razor
+ Register.razor
+ RegisterConfirmation.razor
+ ResendEmailConfirmation.razor
+ ResetPassword.razor
+ ResetPasswordConfirmation.razor
+ _Imports.razor
+Components/Account/Shared/
+ ExternalLoginPicker.razor
+ ManageLayout.razor
+ ManageNavMenu.razor
+ PasskeySubmit.razor
+ RedirectToLogin.razor
+ ShowRecoveryCodes.razor
+ StatusMessage.razor
 Components/
  App.razor
  Layout/
@@ -515,6 +569,7 @@ Components/
   Error.razor
   Example.razor
   Home.razor
+  MyOrders.razor
   NotFound.razor
  Routes.razor
  UI/
@@ -524,6 +579,49 @@ Components/
  _Imports.razor
 
 [dynamicFiles]
+Components/Account/Pages/
+ AccessDenied.razor
+ ConfirmEmail.razor
+ ConfirmEmailChange.razor
+ ExternalLogin.razor
+ ForgotPassword.razor
+ ForgotPasswordConfirmation.razor
+ InvalidPasswordReset.razor
+ InvalidUser.razor
+ Lockout.razor
+ Login.razor
+ LoginWith2fa.razor
+ LoginWithRecoveryCode.razor
+ Manage/
+  ChangePassword.razor
+  DeletePersonalData.razor
+  Disable2fa.razor
+  Email.razor
+  EnableAuthenticator.razor
+  ExternalLogins.razor
+  GenerateRecoveryCodes.razor
+  Index.razor
+  Passkeys.razor
+  PersonalData.razor
+  RenamePasskey.razor
+  ResetAuthenticator.razor
+  SetPassword.razor
+  TwoFactorAuthentication.razor
+  _Imports.razor
+ Register.razor
+ RegisterConfirmation.razor
+ ResendEmailConfirmation.razor
+ ResetPassword.razor
+ ResetPasswordConfirmation.razor
+ _Imports.razor
+Components/Account/Shared/
+ ExternalLoginPicker.razor
+ ManageLayout.razor
+ ManageNavMenu.razor
+ PasskeySubmit.razor
+ RedirectToLogin.razor
+ ShowRecoveryCodes.razor
+ StatusMessage.razor
 Components/
  App.razor
  Layout/
@@ -541,6 +639,7 @@ Components/
   Error.razor
   Example.razor
   Home.razor
+  MyOrders.razor
   NotFound.razor
  Routes.razor
  UI/

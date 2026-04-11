@@ -1,3 +1,5 @@
+@inject NavigationManager NavigationManager
+
 <nav class="navbar navbar-expand-lg bg-primary navbar-dark px-3">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -10,4 +12,52 @@
     <div>
         <Cart />
     </div>
+    <ul class="navbar-nav">
+        <AuthorizeView>
+            <Authorized>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link text-white" href="Account/Manage">
+                        <span><i class="bi bi-person-fill"></i> @context.User.Identity?.Name</span>
+                    </NavLink>
+                </li>
+                <li class="nav-item px-3">
+                    <form action="Account/Logout" method="post">
+                        <AntiforgeryToken />
+                        <input type="hidden" name="ReturnUrl" value="@currentUrl" />
+                        <button type="submit" class="nav-link text-white">
+                            <span><i class="bi bi-arrow-bar-left"></i> Logout</span>
+                        </button>
+                    </form>
+                </li>
+            </Authorized>
+            <NotAuthorized>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link text-white" href="Account/Register">
+                        <span><i class="bi bi-person"></i> Register</span>
+                    </NavLink>
+                </li>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link text-white" href="Account/Login">
+                        <span><i class="bi bi-person-fill"></i> Login</span>
+                    </NavLink>
+                </li>
+            </NotAuthorized>
+        </AuthorizeView>
+    </ul>
 </nav>
+
+@code {
+    private string? currentUrl;
+
+    protected override void OnInitialized()
+    {
+        currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+        NavigationManager.LocationChanged += OnLocationChanged;
+    }
+
+    private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        currentUrl = NavigationManager.ToBaseRelativePath(e.Location);
+        StateHasChanged();
+    }
+}
