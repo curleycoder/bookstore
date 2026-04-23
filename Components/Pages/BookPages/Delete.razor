@@ -52,7 +52,7 @@
         </dl>
         <dl class="row">
             <dt class="col-sm-2">Price</dt>
-            <dd class="col-sm-10">@book.Price</dd>
+            <dd class="col-sm-10">$@book.Price</dd>
         </dl>
         <EditForm method="post" Model="book" OnValidSubmit="DeleteBook" FormName="delete" Enhance>
             <button type="submit" class="btn btn-danger" disabled="@(book is null)">Delete</button> |
